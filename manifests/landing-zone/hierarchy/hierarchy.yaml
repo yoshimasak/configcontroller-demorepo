@@ -1,0 +1,27 @@
+apiVersion: blueprints.cloud.google.com/v1alpha3
+kind: ResourceHierarchy
+metadata: # kpt-merge: hierarchy/root-hierarchy
+  name: root-hierarchy
+  namespace: hierarchy
+  annotations:
+    cnrm.cloud.google.com/blueprint: 'cnrm/landing-zone:hierarchy:simple/v0.3.0'
+    config.kubernetes.io/local-config: 'true'
+spec:
+  config:
+    - shared:
+        - admin
+    - dev:
+        $subtree: projects
+    - prod:
+        $subtree: projects
+    - staging:
+        $subtree: projects
+    - sandbox
+  parentRef:
+    # This should match your organization ID
+    external: '153064141304'
+  subtrees:
+    projects:
+      - common
+      - payment
+      - account
