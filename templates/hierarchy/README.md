@@ -1,10 +1,11 @@
 <!-- BEGINNING OF PRE-COMMIT-BLUEPRINT DOCS HOOK:TITLE -->
-# Simple Hierarchy blueprint
+# Business Unit Hierarchy blueprint
 
 
 <!-- END OF PRE-COMMIT-BLUEPRINT DOCS HOOK:TITLE -->
 <!-- BEGINNING OF PRE-COMMIT-BLUEPRINT DOCS HOOK:BODY -->
-A simple GCP resource hierarchy with top-level folders
+A GCP resource hierarchy organized by business units, teams, and
+environments
 
 ## Setters
 
@@ -30,14 +31,14 @@ This package has no sub-packages.
 
 1.  Clone the package:
     ```shell
-    kpt pkg get https://github.com/GoogleCloudPlatform/blueprints.git/catalog/hierarchy/simple@${VERSION}
+    kpt pkg get https://github.com/GoogleCloudPlatform/blueprints.git/catalog/hierarchy/bu@${VERSION}
     ```
     Replace `${VERSION}` with the desired repo branch or tag
     (for example, `main`).
 
 1.  Move into the local package:
     ```shell
-    cd "./simple/"
+    cd "./bu/"
     ```
 
 1.  Edit the function config file(s):
