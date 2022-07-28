@@ -23,6 +23,7 @@ spec:
   config:
     - sales:
         - dwh:
+        - ai:
   parentRef:
     # This should match your organization ID
     external: '153064141304'
