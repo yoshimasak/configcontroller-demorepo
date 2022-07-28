@@ -15,7 +15,7 @@
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPartialPolicy
 metadata: # kpt-merge: projects/kcc-project-id-owners-permissions
-  name: kcc-project-id-owners-permissions # kpt-set: kcc-${project-id}-owners-permissions
+  name: kcc-project-id-owners-permissions # kpt-set: kcc-prod-${project-id}-owners-permissions
   namespace: projects # kpt-set: ${projects-namespace}
   annotations:
     cnrm.cloud.google.com/blueprint: cnrm/kcc-namespace/v0.4.3,kpt-pkg
@@ -25,8 +25,8 @@ spec:
   resourceRef:
     apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
     kind: Project
-    external: project-id # kpt-set: ${project-id}
+    external: project-id # kpt-set: prod-${project-id}
   bindings:
     - role: roles/owner
       members:
-        - member: serviceAccount:kcc-project-id@management-project-id.iam.gserviceaccount.com # kpt-set: serviceAccount:kcc-${project-id}@${management-project-id}.iam.gserviceaccount.com
+        - member: serviceAccount:kcc-project-id@management-project-id.iam.gserviceaccount.com # kpt-set: serviceAccount:kcc-prod-${project-id}@${management-project-id}.iam.gserviceaccount.com
