@@ -27,7 +27,7 @@ jobs:
         run: sudo chown -R runner:docker manifests/landing-zone/hierarchy/${{ inputs.departmentName }}
 
       - name: Modify setters.yaml
-        run: "sed -i -e 's/1234567890123/153064141304/' -e 's/department/${{ inputes.departmentName }}/' -e 's/service/${{ inputes.serviceName }}/' manifests/landing-zone/hierarchy/${{ inputs.departmentName }}/hierarchy.yaml"
+        run: "sed -i -e 's/1234567890123/153064141304/' -e 's/department/${{ inputs.departmentName }}/' -e 's/service/${{ inputs.serviceName }}/' manifests/landing-zone/hierarchy/${{ inputs.departmentName }}/hierarchy.yaml"
             
       - name: Git push
         run: |
