@@ -22,8 +22,10 @@ metadata: # kpt-merge: hierarchy/root-hierarchy
 spec:
   config:
     - sales:
-        - dwh:
-        - ai:
+        $subtree: environments
   parentRef:
     # This should match your organization ID
     external: '153064141304'
+  subtrees:
+    environments:
+      - dwh
