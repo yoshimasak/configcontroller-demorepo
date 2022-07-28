@@ -23,12 +23,6 @@ spec:
   config:
     - department:
         - service:
-            $subtree: environments
   parentRef:
     # This should match your organization ID
     external: '1234567890123'
-  subtrees:
-    environments:
-      - dev
-      - staging
-      - prod
