@@ -34,7 +34,7 @@ jobs:
         run: npm --prefix .github/scripts/ install .github/scripts/
 
       - name: Create setters.yaml
-        run: node .github/scripts/index.js ${{ inputs.inputs }}
+        run: node .github/scripts/index.js "${{ inputs.inputs }}"
 
 #      - name: Get hyerarchy kpt package
 #        uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
