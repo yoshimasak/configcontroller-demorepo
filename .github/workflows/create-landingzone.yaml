@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: echo inputs
-        run: echo "${{ inputs.inputs }}""
+        run: echo "${{ inputs.inputs }}"
 
       - name: Use Node.js
         uses: actions/setup-node@v3
