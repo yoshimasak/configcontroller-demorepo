@@ -3,7 +3,7 @@ name: Create the landing zone
 on:
   workflow_dispatch:
     inputs:
-      data:
+      hoge:
         type: string
         required: true
 
