@@ -24,7 +24,7 @@ jobs:
         with:
           script: |
             const yaml = require('js-yaml')
-            const json = JSON.parse("${{ inputs.inputs }}")
+            const json = JSON.parse(${{ inputs.inputs }})
             console.log(yaml.dump(json))
 
 #      - name: Install dependencies
