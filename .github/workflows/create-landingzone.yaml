@@ -6,14 +6,6 @@ on:
       inputs:
         type: string
         required: true
-
-#      departmentName:
-#        type: string
-#        required: true
-#
-#      serviceName:
-#        type: string
-#        required: true
         
 jobs:
   build:
@@ -22,20 +14,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: echo inputs
-        run: echo "${{ inputs.inputs }}"
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      
-      - name: Install dependencies
-        run: npm --prefix .github/scripts/ install .github/scripts/
 
-      - name: Create setters.yaml
-        run: node .github/scripts/index.js "${{ inputs.inputs }}"
+      - run: npm install js-yaml
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const yaml = require('js-yaml')
+            const json = JSON.parse("${{ inputs.inputs }}")
+            console.log(yaml.dump(json))
 
+#      - name: Install dependencies
+#        run: npm --prefix .github/scripts/ install .github/scripts/
+#
+#      - name: Create setters.yaml
+#        run: node .github/scripts/index.js "${{ inputs.inputs }}"
+#
 #      - name: Get hyerarchy kpt package
 #        uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
 #        with:
