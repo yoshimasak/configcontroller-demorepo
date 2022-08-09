@@ -20,12 +20,8 @@ metadata: # kpt-merge: hierarchy/root-hierarchy
     cnrm.cloud.google.com/blueprint: 'cnrm/landing-zone:hierarchy:bu/v0.4.0'
     config.kubernetes.io/local-config: 'true'
 spec:
-  config:
-    - department:
-        $subtree: environments
+  config: # kpt-set: ${departments}
+    - hierarchy
   parentRef:
     # This should match your organization ID
-    external: '1234567890123'
-  subtrees:
-    environments:
-      - service
+    external: '1234567890123' # kpt-set: ${org-id}
