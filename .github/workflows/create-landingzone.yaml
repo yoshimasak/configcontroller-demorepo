@@ -24,8 +24,8 @@ jobs:
         with:
           script: |
             const yaml = require('js-yaml')
-            const json = JSON.parse(${{ inputs.inputs }})
-            console.log(yaml.dump(json))
+#            const json = JSON.parse(${{ inputs.inputs }})
+            console.log(${{ inputs.inputs }})
 
 #      - name: Install dependencies
 #        run: npm --prefix .github/scripts/ install .github/scripts/
