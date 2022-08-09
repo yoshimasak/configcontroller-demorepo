@@ -24,7 +24,7 @@ jobs:
         with:
           script: |
             const yamllib = require('js-yaml')
-            const payload = ${{ inputs.inputs }}
+            const payload = '${{ inputs.inputs }}'
             const json = JSON.parse(payload)
             const yaml = yamllib.dump(json)
             console.log(yaml)
