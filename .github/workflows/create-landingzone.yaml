@@ -24,7 +24,7 @@ jobs:
         with:
           script: |
             const yaml = require('js-yaml')
-            const parm = ${{ inputs.inputs }}
+            const parm = "${{ inputs.inputs }}"
             console.log(parm)
 
 #      - name: Install dependencies
