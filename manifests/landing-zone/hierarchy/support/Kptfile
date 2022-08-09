@@ -1,0 +1,33 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: support
+  annotations:
+    blueprints.cloud.google.com/title: Business Unit Hierarchy blueprint
+    config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: https://github.com/yoshimasak/configcontroller-demorepo
+    directory: /templates/hierarchy
+    ref: main
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/yoshimasak/configcontroller-demorepo
+    directory: /templates/hierarchy
+    ref: main
+    commit: 24cf9561a00c28122a8d17851adb9c9460e31334
+info:
+  description: |
+    A GCP resource hierarchy organized by business units, teams, and
+    environments
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/apply-setters:v0.2
+      configPath: setters.yaml
+    - image: gcr.io/kpt-fn/set-namespace:v0.1
+      configMap:
+        namespace: hierarchy
+    - image: gcr.io/kpt-fn/generate-folders:v0.1
