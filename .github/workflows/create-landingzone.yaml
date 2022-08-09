@@ -23,10 +23,10 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const yaml = require('js-yaml')
+            const yamllib = require('js-yaml')
             const payload = "${{ inputs.inputs }}"
             const json = JSON.parse(payload)
-            const yaml = yaml.dump(json)
+            const yaml = yamllib.dump(json)
             console.log(yaml)
 
 #      - name: Install dependencies
