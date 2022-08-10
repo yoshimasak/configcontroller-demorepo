@@ -6,6 +6,7 @@ metadata:
   annotations:
     cnrm.cloud.google.com/blueprint: 'kpt-fn'
 spec:
+  displayName: department-folder # kpt-set: ${department}
   organizationRef:
     external: "1234567890123" # kpt-set: ${org-id}
 ---
@@ -17,5 +18,6 @@ metadata:
   annotations:
     cnrm.cloud.google.com/blueprint: 'kpt-fn'
 spec:
+  displayName: department-service-folder # kpt-set: ${department}-${service}
   folderRef:
     external: "department-folder" # kpt-set: ${department}
