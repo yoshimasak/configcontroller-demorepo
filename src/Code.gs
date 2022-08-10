@@ -16,8 +16,6 @@ function createJwtToken(appId, privateKey) {
 }
 
 function sendHttpRequest(url, method, credential, payload) {
-  console.info("Start sending request to " + url);
-
   try {
     const response = UrlFetchApp.fetch(url, {
       method: method,
@@ -50,7 +48,6 @@ function getFormValue(e) {
 
 function triggerGithubActions(baseUrl, accessToken, userName, repo, workflow, payload) {
   url = baseUrl + `/repos/${userName}/${repo}/actions/workflows/${workflow}/dispatches`;  
-  console.log(url);
 
   try {
     const response = UrlFetchApp.fetch(url, {
@@ -59,7 +56,7 @@ function triggerGithubActions(baseUrl, accessToken, userName, repo, workflow, pa
         Authorization: `token ${accessToken}`,
         Accept: 'application/vnd.github+json'
       },
-      payload: payload
+      payload: JSON.stringify(payload)
     });
   } catch (e) {
     console.error(e);
@@ -69,29 +66,46 @@ function triggerGithubActions(baseUrl, accessToken, userName, repo, workflow, pa
 function main(e) {
   console.log("Start executing.");
 
-  const formResponse = getFormValue(e);
-  const departmentName = formResponse[0].getResponse();
-  const serviceName = formResponse[1].getResponse();
+  // const formResponse = getFormValue(e);
+  // const departmentName = formResponse[0].getResponse();
+  // const serviceName = formResponse[1].getResponse();
+
+  const departmentName = "support";
+  const serviceName = "dwh";
 
   const baseUrl = "https://api.github.com";
   const properties = PropertiesService.getScriptProperties();
   const appId = properties.getProperty('appId');
   const installationId = properties.getProperty('installationId');
   const privateKey = properties.getProperty('privateKey').replace(/\\n/g, "\n");
+  const orgId = properties.getProperty('orgId');
   const accessToken = getGithubAccessToken(baseUrl, appId, installationId, privateKey);
   const userName = properties.getProperty('userName');
   const repo = properties.getProperty('repo');
 
-  console.log(accessToken);
+  const hierarchy_setters = {
+    "apiVersion": "v1",
+    "kind": "ConfigMap",
+    "metadata": {
+      "name": "setters",
+      "annotations": {
+        "config.kubernetes.io/local-config": "true"
+      }
+    },
+    "data": {
+      "departments": `- ${departmentName}:\n    - ${serviceName}`,
+      "org-id": orgId
+    }
+  };
 
   const payload = {
-    "ref": "dev",
+    "ref": "main",
     "inputs": {
-      "departmentName": departmentName,
-      "serviceName": serviceName
+      "setters": JSON.stringify(hierarchy_setters),
+      "departmentName": departmentName
     }
   };
 
   console.log(JSON.stringify(payload));
-  triggerGithubActions(baseUrl, accessToken, userName, repo, "create-landingzone.yaml", JSON.stringify(payload));
+  triggerGithubActions(baseUrl, accessToken, userName, repo, "create-landingzone.yaml", payload);
 }

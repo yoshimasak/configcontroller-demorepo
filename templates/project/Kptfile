@@ -1,7 +1,7 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
 metadata:
-  name: projects
+  name: project
   annotations:
     blueprints.cloud.google.com/title: Project blueprint
     config.kubernetes.io/local-config: "true"
@@ -18,7 +18,7 @@ upstreamLock:
     repo: https://github.com/GoogleCloudPlatform/blueprints
     directory: /catalog/project
     ref: main
-    commit: 1ac8e4930c9da45e80c622d4cbd681ee0a7c364d
+    commit: 5e0966b91b8d40fd00e8c2bc43e6b49cf3185aa2
 info:
   description: |
     A project and a project namespace in which to manage project resources with
