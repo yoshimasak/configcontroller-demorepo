@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: setters
+  annotations:
+    config.kubernetes.io/local-config: 'true'
+data:
+  departments: |-
+    - support:
+        - bi
+  org-id: '153064141304'
