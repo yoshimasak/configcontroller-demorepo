@@ -6,3 +6,4 @@ data:
   folder-name: name.of.folder
   project-id: project-id
   folder-namespace: hierarchy
+  projects-namespace: projects
