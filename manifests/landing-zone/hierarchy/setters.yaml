@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: setters
+data:
+  department: "support"
+  service: "dwh"
+  org-id: "15563125142"
