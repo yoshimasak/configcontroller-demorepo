@@ -16,6 +16,8 @@ function createJwtToken(appId, privateKey) {
 }
 
 function sendHttpRequest(url, method, credential, payload) {
+  console.info("Start sending request to " + url);
+
   try {
     const response = UrlFetchApp.fetch(url, {
       method: method,
@@ -48,6 +50,7 @@ function getFormValue(e) {
 
 function triggerGithubActions(baseUrl, accessToken, userName, repo, workflow, payload) {
   url = baseUrl + `/repos/${userName}/${repo}/actions/workflows/${workflow}/dispatches`;  
+  console.log(url);
 
   try {
     const response = UrlFetchApp.fetch(url, {
@@ -64,15 +67,6 @@ function triggerGithubActions(baseUrl, accessToken, userName, repo, workflow, pa
 }
 
 function main(e) {
-  console.log("Start executing.");
-
-  // const formResponse = getFormValue(e);
-  // const departmentName = formResponse[0].getResponse();
-  // const serviceName = formResponse[1].getResponse();
-
-  const departmentName = "support";
-  const serviceName = "dwh";
-
   const baseUrl = "https://api.github.com";
   const properties = PropertiesService.getScriptProperties();
   const appId = properties.getProperty('appId');
@@ -82,6 +76,10 @@ function main(e) {
   const accessToken = getGithubAccessToken(baseUrl, appId, installationId, privateKey);
   const userName = properties.getProperty('userName');
   const repo = properties.getProperty('repo');
+
+  const formResponse = getFormValue(e);
+  const department = formResponse[0].getResponse();
+  const service = formResponse[1].getResponse();
 
   const hierarchy_setters = {
     "apiVersion": "v1",
@@ -93,7 +91,7 @@ function main(e) {
       }
     },
     "data": {
-      "departments": `- ${departmentName}:\n    - ${serviceName}`,
+      "departments": `- ${department}:\n    - ${service}`,
       "org-id": orgId
     }
   };
@@ -102,7 +100,8 @@ function main(e) {
     "ref": "main",
     "inputs": {
       "setters": JSON.stringify(hierarchy_setters),
-      "departmentName": departmentName
+      "department": department,
+      "service": service
     }
   };
 
