@@ -24,9 +24,11 @@ jobs:
 
       - run: |
           env=(${{ inputs.environment }}//,/)
-          echo env[0]
-          echo env[1]
-          echo env[2]
+
+          for e in "${env[@]}"
+          do
+            echo $e
+          done
 
     #  - name: Get project kpt package
     #    uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
