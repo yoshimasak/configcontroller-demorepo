@@ -3,13 +3,17 @@ name: Create the landing zone
 on:
   workflow_dispatch:
     inputs:
-      departmentName:
+      environment:
         type: string
         required: true
 
-      setters:
-        type: string
-        required: true
+      # departmentName:
+      #   type: string
+      #   required: true
+
+      # setters:
+      #   type: string
+      #   required: true
         
 jobs:
   build:
@@ -18,16 +22,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-     - name: Get project kpt package
-       uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
-       with:
-         args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/projects@main manifests/landing-zone/projects/${{ inputs.departmentName }}-${{ inputs.serviceName }}
+      - run: echo ${{ inputs.environment }}
 
-     - name: Change permission
-       run: sudo chown -R runner:docker manifests/landing-zone/projects/${{ inputs.departmentName }}-${{ inputs.serviceName }}
+    #  - name: Get project kpt package
+    #    uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
+    #    with:
+    #      args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/projects@main manifests/landing-zone/projects/${{ inputs.departmentName }}-${{ inputs.serviceName }}
+
+    #  - name: Change permission
+    #    run: sudo chown -R runner:docker manifests/landing-zone/projects/${{ inputs.departmentName }}-${{ inputs.serviceName }}
      
-     - name: Modify setters.yaml
-       run: "sed -i -e 's/project-id: project-id/project-id: ${{ inputs.departmentName }}-${{ inputs.serviceName }}/' -e 's/name.of.folder/${{ inputs.departmentName }}.${{ inputs.serviceName }}/' manifests/landing-zone/projects/${{ inputs.departmentName }}-${{ inputs.serviceName }}/setters.yaml" 
+    #  - name: Modify setters.yaml
+    #    run: "sed -i -e 's/project-id: project-id/project-id: ${{ inputs.departmentName }}-${{ inputs.serviceName }}/' -e 's/name.of.folder/${{ inputs.departmentName }}.${{ inputs.serviceName }}/' manifests/landing-zone/projects/${{ inputs.departmentName }}-${{ inputs.serviceName }}/setters.yaml" 
 
       # - name: Get hyerarchy kpt package
       #   uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
