@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: # kpt-merge: /setters
+  name: setters
+data:
+  folder-name: support.bi
+  project-id: support-bi
+  folder-namespace: hierarchy
