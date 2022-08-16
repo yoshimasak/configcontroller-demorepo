@@ -13,7 +13,7 @@
 # limitations under the License.
 apiVersion: blueprints.cloud.google.com/v1alpha1
 kind: ProjectServiceSet
-metadata: # kpt-merge: config-control/management-project-id
+metadata:
   name: management-project-id # kpt-set: ${management-project-id}
   namespace: config-control # kpt-set: ${management-namespace}
   annotations:

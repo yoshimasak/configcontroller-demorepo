@@ -13,7 +13,7 @@
 # limitations under the License.
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMServiceAccount
-metadata: # kpt-merge: config-control/hierarchy-sa
+metadata:
   name: hierarchy-sa
   namespace: config-control # kpt-set: ${management-namespace}
   annotations:
@@ -25,7 +25,7 @@ spec:
 ---
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPolicyMember
-metadata: # kpt-merge: config-control/hierarchy-sa-folderadmin-permissions
+metadata:
   name: hierarchy-sa-folderadmin-permissions
   namespace: config-control # kpt-set: ${management-namespace}
   annotations:
@@ -42,7 +42,7 @@ spec:
 ---
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPartialPolicy
-metadata: # kpt-merge: config-control/hierarchy-sa-workload-identity-binding
+metadata:
   name: hierarchy-sa-workload-identity-binding
   namespace: config-control # kpt-set: ${management-namespace}
   annotations:
@@ -61,7 +61,7 @@ spec:
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
-metadata: # kpt-merge: hierarchy/allow-resource-reference-from-hierarchy
+metadata:
   name: allow-resource-reference-from-hierarchy
   namespace: hierarchy
   annotations:
@@ -77,7 +77,7 @@ subjects:
 ---
 apiVersion: v1
 kind: Namespace
-metadata: # kpt-merge: /hierarchy
+metadata:
   name: hierarchy
   annotations:
     cnrm.cloud.google.com/organization-id: "123456789012" # kpt-set: ${org-id}
@@ -85,7 +85,7 @@ metadata: # kpt-merge: /hierarchy
 ---
 apiVersion: core.cnrm.cloud.google.com/v1beta1
 kind: ConfigConnectorContext
-metadata: # kpt-merge: hierarchy/configconnectorcontext.core.cnrm.cloud.google.com
+metadata:
   name: configconnectorcontext.core.cnrm.cloud.google.com
   namespace: hierarchy
   annotations:

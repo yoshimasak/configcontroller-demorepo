@@ -1,7 +1,7 @@
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: Folder
 metadata:
-  name: department-folder # kpt-set: ${department}-folder
+  name: department-folder # kpt-set: ${department}
   namespace: hierarchy  
 spec:
   displayName: folder-name # kpt-set: ${department}
@@ -11,9 +11,9 @@ spec:
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: Folder
 metadata:
-  name: service-folder # kpt-set: ${department}-${service}-folder
+  name: service-folder # kpt-set: ${department}-${service}
   namespace: hierarchy
 spec:
   displayName: folder-name # kpt-set: ${department}-${service}
   folderRef:
-    name: 'department-folder' # kpt-set: ${department}
+    name: department-folder # kpt-set: ${department}

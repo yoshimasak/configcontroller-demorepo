@@ -91,17 +91,33 @@ function main(e) {
       }
     },
     "data": {
-      "departments": `- ${department}:\n    - ${service}`,
-      "org-id": orgId
+      "department": department,
+      "service": service
+    }
+  };
+
+  const project_setters = {
+    "apiVersion": "v1",
+    "kind": "ConfigMap",
+    "metadata": {
+      "name": "setters",
+      "annotations": {
+        "config.kubernetes.io/local-config": "true"
+      }
+    },
+    "data": {
+      "folder-name": `${department}.${service}`,
+      "project-id": `${department}-${service}`
     }
   };
 
   const payload = {
     "ref": "main",
     "inputs": {
-      "setters": JSON.stringify(hierarchy_setters),
       "department": department,
-      "service": service
+      "service": service,
+      "hierarchy_setters": JSON.stringify(hierarchy_setters),
+      "project_setters": JSON.stringify(project_setters)
     }
   };
 

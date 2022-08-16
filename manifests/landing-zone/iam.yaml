@@ -13,7 +13,7 @@
 # limitations under the License.
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPolicyMember
-metadata: # kpt-merge: config-control/org-admins-iam
+metadata:
   name: org-admins-iam
   namespace: config-control # kpt-set: ${management-namespace}
   annotations:
@@ -28,7 +28,7 @@ spec:
 ---
 apiVersion: iam.cnrm.cloud.google.com/v1beta1
 kind: IAMPolicyMember
-metadata: # kpt-merge: config-control/billing-admins-iam
+metadata:
   name: billing-admins-iam
   namespace: config-control # kpt-set: ${management-namespace}
   annotations:

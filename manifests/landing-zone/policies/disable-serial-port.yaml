@@ -13,7 +13,7 @@
 # limitations under the License.
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: ResourceManagerPolicy
-metadata: # kpt-merge: policies/disable-serial-port
+metadata:
   name: disable-serial-port
   namespace: policies
   annotations:

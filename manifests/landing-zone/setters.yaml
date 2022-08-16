@@ -13,7 +13,7 @@
 # limitations under the License.
 apiVersion: v1
 kind: ConfigMap
-metadata: # kpt-merge: /setters
+metadata:
   name: setters
   annotations:
     config.kubernetes.io/local-config: "true"
