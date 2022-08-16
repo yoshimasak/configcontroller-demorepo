@@ -106,7 +106,7 @@ function main(e) {
       }
     },
     "data": {
-      "folder-name": `${department}.${service}`,
+      "folder-name": `${department}-${service}`,
       "project-id": `${department}-${service}`
     }
   };
