@@ -1,0 +1,29 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: projects
+  annotations:
+    blueprints.cloud.google.com/title: Project blueprint
+    config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: https://github.com/yoshimasak/configcontroller-demorepo
+    directory: /templates/projects
+    ref: main
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/yoshimasak/configcontroller-demorepo
+    directory: /templates/projects
+    ref: main
+    commit: 88cb89ab347b9e6731ccc4753236e1565f5949c8
+info:
+  description: |
+    A project and a project namespace in which to manage project resources with
+    Config Connector.
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/apply-setters:v0.1
+      configPath: setters.yaml
