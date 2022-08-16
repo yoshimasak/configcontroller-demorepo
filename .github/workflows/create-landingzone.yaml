@@ -26,10 +26,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create directories
+      - name: Create directory
         run: |
-          mkdir manifests/landing-zone/hierarchy/${{ inputs.department }}
-          mkdir -p manifests/landing-zone/projects/${{ inputs.department }}/${{ inputs.service }}
+          mkdir manifests/landing-zone/projects/${{ inputs.department }}
 
       - name: Get hierarchy kpt package
         uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
