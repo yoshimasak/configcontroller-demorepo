@@ -73,7 +73,7 @@ jobs:
             yaml = yamllib.dump(json)
             console.log(yaml)
 
-            fs.writeFile('manifests/landing-zone/pprojects/${{ inputs.department }}/${{ inputs.service }}/setters.yaml', yaml, 'utf8', (err) => {
+            fs.writeFile('manifests/landing-zone/projects/${{ inputs.department }}/${{ inputs.service }}/setters.yaml', yaml, 'utf8', (err) => {
               if (err) {
                 console.error(err.message)
               }
