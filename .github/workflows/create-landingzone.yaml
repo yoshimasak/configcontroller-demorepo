@@ -22,13 +22,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get hyerarchy kpt package
+      - name: Get folders kpt package
         uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
         with:
-          args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/hierarchy@main manifests/landing-zone/hierarchy/${{ inputs.department }}
+          args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/folders@main manifests/landing-zone/folders/${{ inputs.department }}
 
       - name: Change permission
-        run: sudo chown -R runner:docker manifests/landing-zone/hierarchy/${{ inputs.department }}
+        run: sudo chown -R runner:docker manifests/landing-zone/folders/${{ inputs.department }}
+
+      # - name: Get hyerarchy kpt package
+      #   uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
+      #   with:
+      #     args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/hierarchy@main manifests/landing-zone/hierarchy/${{ inputs.department }}
+
+      # - name: Change permission
+      #   run: sudo chown -R runner:docker manifests/landing-zone/hierarchy/${{ inputs.department }}
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -45,22 +53,22 @@ jobs:
             const json = JSON.parse(JSON.stringify(payload))
             const yaml = yamllib.dump(json)
             console.log(yaml)
-            fs.writeFile('manifests/landing-zone/hierarchy/${{ inputs.department }}/setters.yaml', yaml, 'utf8', (err) => {
+            fs.writeFile('manifests/landing-zone/folders/${{ inputs.department }}/setters.yaml', yaml, 'utf8', (err) => {
               if (err) {
                 console.error(err.message)
               }
             })
 
-      - name: Get project kpt package
-        uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
-        with:
-          args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/projects@main manifests/landing-zone/projects/${{ inputs.department }}-${{ inputs.service }}
+      # - name: Get project kpt package
+      #   uses: docker://gcr.io/kpt-dev/kpt:v1.0.0-beta.9
+      #   with:
+      #     args: pkg get https://github.com/yoshimasak/configcontroller-demorepo.git/templates/projects@main manifests/landing-zone/projects/${{ inputs.department }}-${{ inputs.service }}
 
-      - name: Change permission
-        run: sudo chown -R runner:docker manifests/landing-zone/projects/${{ inputs.department }}-${{ inputs.service }}
+      # - name: Change permission
+      #   run: sudo chown -R runner:docker manifests/landing-zone/projects/${{ inputs.department }}-${{ inputs.service }}
       
-      - name: Modify setters.yaml
-        run: "sed -i -e 's/project-id: project-id/project-id: ${{ inputs.department }}-${{ inputs.service }}/' -e 's/name.of.folder/${{ inputs.department }}.${{ inputs.service }}/' manifests/landing-zone/projects/${{ inputs.department }}-${{ inputs.service }}/setters.yaml" 
+      # - name: Modify setters.yaml
+      #   run: "sed -i -e 's/project-id: project-id/project-id: ${{ inputs.department }}-${{ inputs.service }}/' -e 's/name.of.folder/${{ inputs.department }}.${{ inputs.service }}/' manifests/landing-zone/projects/${{ inputs.department }}-${{ inputs.service }}/setters.yaml" 
 
       - name: Git push
         run: |
