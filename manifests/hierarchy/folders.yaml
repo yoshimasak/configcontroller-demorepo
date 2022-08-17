@@ -16,4 +16,4 @@ metadata:
 spec:
   displayName: folder-name # kpt-set: ${department}-${service}
   folderRef:
-    name: department-folder # kpt-set: ${department}
+    name: department-folder # kpt-set: ${department}-folder
