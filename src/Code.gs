@@ -121,5 +121,5 @@ function main(e) {
   };
   console.log(payload);
 
-  triggerGithubActions(baseUrl, accessToken, userName, repo, "create-landingzone.yaml", payload);
+  triggerGithubActions(baseUrl, accessToken, userName, repo, "create-environment.yaml", payload);
 }
