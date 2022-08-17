@@ -86,6 +86,7 @@ function main(e) {
   const formResponse = getFormValue(e);
   const department = formResponse[0].getResponse();
   const service = formResponse[1].getResponse();
+  const folderAdmins = formResponse[2].getResponse();
 
   var setters_common = {
     "apiVersion": "v1",
@@ -100,7 +101,8 @@ function main(e) {
 
   const hierarchy_setters_data = {
     "department": department,
-    "service": service
+    "service": service,
+    "group-folder-admins": folderAdmins
   };
 
   const project_setters_data = {
