@@ -11,6 +11,10 @@ on:
         type: string
         required: true
 
+      landingzone_setters:
+        type: string
+        required: true
+
       hierarchy_setters:
         type: string
         required: true
@@ -26,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Create directory
+      - name: Create project directory
         run: |
           mkdir manifests/landing-zone/projects/${{ inputs.department }}
 
@@ -55,11 +59,22 @@ jobs:
         with:
           script: |
             const fs = require('fs')
-            const yamllib = require('js-yaml')
+            const js-yaml = require('js-yaml')
 
-            var payload = ${{ inputs.hierarchy_setters }}
+            var payload = ${{ inputs.landingzone_setters }}
             var json = JSON.parse(JSON.stringify(payload))
-            var yaml = yamllib.dump(json)
+            var yaml = js-yaml.dump(json)
+            console.log(yaml)
+
+            fs.writeFile('manifests/landing-zone/setters.yaml', yaml, 'utf8', (err) => {
+              if (err) {
+                console.error(err.message)
+              }
+            })
+
+            payload = ${{ inputs.hierarchy_setters }}
+            json = JSON.parse(JSON.stringify(payload))
+            yaml = js-yaml.dump(json)
             console.log(yaml)
 
             fs.writeFile('manifests/landing-zone/hierarchy/${{ inputs.department }}/setters.yaml', yaml, 'utf8', (err) => {
@@ -70,7 +85,7 @@ jobs:
 
             payload = ${{ inputs.project_setters }}
             json = JSON.parse(JSON.stringify(payload))
-            yaml = yamllib.dump(json)
+            yaml = js-yaml.dump(json)
             console.log(yaml)
 
             fs.writeFile('manifests/landing-zone/projects/${{ inputs.department }}/${{ inputs.service }}/setters.yaml', yaml, 'utf8', (err) => {
