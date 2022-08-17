@@ -1,0 +1,12 @@
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: folder-admin # kpt-set: ${department}-folder-admin
+  namespace: hierarchy
+spec:
+  member: group:gcp-folder-admins@example.com # kpt-set: group:${group-folder-admins}
+  role: roles/owner
+  resourceRef:
+    kind: Folder
+    name: folder-name # kpt-set: ${department}-folder
+    namespace: hierarchy
