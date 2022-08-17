@@ -54,7 +54,7 @@ jobs:
         with:
           node-version: '16.x'
 
-      - run: Create setters files
+      - run: npm install js-yaml
       - uses: actions/github-script@v6
         with:
           script: |
