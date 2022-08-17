@@ -54,16 +54,16 @@ jobs:
         with:
           node-version: '16.x'
 
-      - run: npm install js-yaml
+      - run: Create setters files
       - uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs')
-            const js-yaml = require('js-yaml')
+            const jsyaml = require('js-yaml')
 
             var payload = ${{ inputs.landingzone_setters }}
             var json = JSON.parse(JSON.stringify(payload))
-            var yaml = js-yaml.dump(json)
+            var yaml = jsyaml.dump(json)
             console.log(yaml)
 
             fs.writeFile('manifests/landing-zone/setters.yaml', yaml, 'utf8', (err) => {
@@ -74,7 +74,7 @@ jobs:
 
             payload = ${{ inputs.hierarchy_setters }}
             json = JSON.parse(JSON.stringify(payload))
-            yaml = js-yaml.dump(json)
+            yaml = jsyaml.dump(json)
             console.log(yaml)
 
             fs.writeFile('manifests/landing-zone/hierarchy/${{ inputs.department }}/setters.yaml', yaml, 'utf8', (err) => {
@@ -85,7 +85,7 @@ jobs:
 
             payload = ${{ inputs.project_setters }}
             json = JSON.parse(JSON.stringify(payload))
-            yaml = js-yaml.dump(json)
+            yaml = jsyaml.dump(json)
             console.log(yaml)
 
             fs.writeFile('manifests/landing-zone/projects/${{ inputs.department }}/${{ inputs.service }}/setters.yaml', yaml, 'utf8', (err) => {
