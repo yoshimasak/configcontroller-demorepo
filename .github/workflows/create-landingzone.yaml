@@ -11,10 +11,6 @@ on:
         type: string
         required: true
 
-      landingzone_setters:
-        type: string
-        required: true
-
       hierarchy_setters:
         type: string
         required: true
@@ -61,20 +57,9 @@ jobs:
             const fs = require('fs')
             const jsyaml = require('js-yaml')
 
-            var payload = ${{ inputs.landingzone_setters }}
+            var payload = ${{ inputs.hierarchy_setters }}
             var json = JSON.parse(JSON.stringify(payload))
             var yaml = jsyaml.dump(json)
-            console.log(yaml)
-
-            fs.writeFile('manifests/landing-zone/setters.yaml', yaml, 'utf8', (err) => {
-              if (err) {
-                console.error(err.message)
-              }
-            })
-
-            payload = ${{ inputs.hierarchy_setters }}
-            json = JSON.parse(JSON.stringify(payload))
-            yaml = jsyaml.dump(json)
             console.log(yaml)
 
             fs.writeFile('manifests/landing-zone/hierarchy/${{ inputs.department }}/setters.yaml', yaml, 'utf8', (err) => {

@@ -79,11 +79,6 @@ function main(e) {
   const appId = properties.getProperty('appId');
   const installationId = properties.getProperty('installationId');
   const privateKey = properties.getProperty('privateKey').replace(/\\n/g, "\n");
-  const orgId = properties.getProperty('orgId');
-  const billingId = properties.getProperty('billingId');
-  const managementProject = properties.getProperty('managementProjectId');
-  const orgAdmin = properties.getProperty('orgAdmin');
-  const billingAdmin = properties.getProperty('billingAdmin');
   const accessToken = getGithubAccessToken(baseUrl, appId, installationId, privateKey);
   const userName = properties.getProperty('userName');
   const repo = properties.getProperty('repo');
@@ -103,15 +98,6 @@ function main(e) {
     }
   };
 
-  const landingzone_setters_data = {
-    "org-id": orgId,
-    "billing-account-id": billingId,
-    "group-org-admins": orgAdmin,
-    "group-billing-admins": billingAdmin,
-    "management-project-id": managementProject,
-    "management-namespace": "config-control"
-  };
-
   const hierarchy_setters_data = {
     "department": department,
     "service": service
@@ -127,7 +113,6 @@ function main(e) {
     "inputs": {
       "department": department,
       "service": service,
-      "landingzone_setters": JSON.stringify(addPropertiesToJson(setters_common, "data", landingzone_setters_data)),
       "hierarchy_setters": JSON.stringify(addPropertiesToJson(setters_common, "data", hierarchy_setters_data)),
       "project_setters": JSON.stringify(addPropertiesToJson(setters_common, "data", project_setters_data))
     }
