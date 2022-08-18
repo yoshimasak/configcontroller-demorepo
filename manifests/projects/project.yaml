@@ -1,10 +1,11 @@
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
 kind: Project
 metadata:
-  name: prod-project-name # kpt-set: ${project-id}-${unique-id}-prod-project
+  name: prod-project-name # kpt-set: prod-${project-id}-${unique-id}-project
   namespace: projects
 spec:
-  name: prod-project-name # kpt-set: ${project-id}-${unique-id}-prod
+  name: prod-project-name # kpt-set: prod-${project-id}-${unique-id}
+  resourceID: prod-project-id # kpt-set: prod-${project-id}-${unique-id}
   billingAccountRef:
     external: "AAAAAA-BBBBBB-CCCCCC" # kpt-set: ${billing-account-id}
   folderRef:
